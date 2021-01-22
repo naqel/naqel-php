@@ -1,0 +1,27 @@
+{
+    "name": "naqel/sdk",
+    "type": "library",
+    "description": "A PHP wrapper for Naqel's API",
+    "keywords": ["naqel", "shipping", "api"],
+    "homepage": "http://github.com/naqel/naqel-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohammad ALTAWEEL",
+            "email": "hello@mohammad.tech"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+	  	"ext-soap": "*"
+	},
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "^2.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "Naqel\\": "src"
+        }
+    }
+}
