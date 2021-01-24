@@ -28,6 +28,79 @@ You can install **naqel-php** via a composer or by downloading the source.
 composer require naqel/sdk
 ```
 
+## Quickstart:
+
+Set the configurations with your credential and information:
+```php
+$naqel = new \Naqel\Naqel([
+    'use_sandbox' => true,
+    'client_id'   => '[YOUR_CLIENT_ID]',
+    'password'    => '[YOUR_CLIENT_PASSWORD]',
+    'version'     => '9.0',
+]);
+
+// Set your address
+$clientAddress = (new \Naqel\Models\ClientAddress())
+    ->setPhoneNumber('0555555555')
+    ->setFirstAddress('King Abdulaziz Street')
+    ->setCountryCode('KSA')
+    ->setCityCode('RUH');
+
+// Set your contact
+$clientContact = (new \Naqel\Models\ClientContact())
+    ->setName('Mohammad')
+    ->setPhoneNumber('05xxxxxxxx');
+
+// Attach both address and contact to Naqel instance
+$naqel->setClientAddress($clientAddress);
+$naqel->setClientContact($clientContact);
+```
+
+Set Consignee Info:
+```php
+$consigneeInfo = (new \Naqel\Models\ConsigneeInfo())
+    ->setConsigneeName('Abdullah')
+    ->setPhoneNumber('05xxxxxxxx')
+    ->setAddress('King Salman Street')
+    ->setCountryCode('KSA')
+    ->setCityCode('RUH');
+```
+
+Set Manifest Shipment:
+```php
+$manifestShipment = (new \Naqel\Models\ManifestShipment())
+    ->setConsigneeInfo($consigneeInfo)
+    ->setBillingType(\Naqel\Constants\BillingType::ON_ACCOUNT)
+    ->setLoadTypeID(\Naqel\Constants\LoadType::NON_DOCUMENT)
+    ->setPiecesCount(1)
+    ->setWeight(1.0);
+```
+
+Create a New Waybill w/ Manifest:
+```php
+$waybill = $naqel->createWaybill()->attachManifest($manifestShipment);
+```
+
+Get the waybill number:
+```php
+$waybillNumber = $waybill->getWaybillNumber();
+```
+
+Get the waybill sticker as a PDF content:
+```php
+$sticker = $waybill->getWaybillSticker(
+    \Naqel\Constants\StickerSize::FourMFourInches
+);
+```
+
+Or you can get a sticker by a waybill number:
+```php
+$sticker = $naqel->getWaybillSticker()
+    ->setWaybillNo($waybill->getWaybillNumber())
+    ->setStickerSize(\Naqel\Constants\StickerSize::FourMFourInches)
+    ->getPDF();
+```
+
 ## Versioning
 
 `naqel-php` uses a [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/naqel/naqel-php/tags).
