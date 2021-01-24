@@ -12,6 +12,9 @@ class ManifestShipment extends Model
     public float $Weight;
     public int $LoadTypeID;
 
+    // Mandatory if `BillingType` is set to `CASH_ON_DELIVERY`
+    public float $CODCharge = 0.0;
+
     // Mandatory if `DeclareValue` > 0
     public $CommercialInvoice;
     public int $CurrenyID;
@@ -20,7 +23,6 @@ class ManifestShipment extends Model
     public $Latitude;
     public $Longitude;
     public string $DeliveryInstruction;
-    public float $CODCharge;
     public float $DeclareValue;
     public string $GoodDesc;
     public bool $IsInsurance;
