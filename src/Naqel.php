@@ -3,6 +3,7 @@
 namespace Naqel;
 
 use Naqel\Methods\CreateWaybill;
+use Naqel\Methods\GetLoadTypeList;
 use Naqel\Methods\GetWaybillSticker;
 use Naqel\Models\ClientAddress;
 use Naqel\Models\ClientContact;
@@ -36,6 +37,11 @@ class Naqel
     public function getWaybillSticker(): GetWaybillSticker
     {
         return new GetWaybillSticker();
+    }
+
+    public function getLoadTypeList(): GetLoadTypeList
+    {
+        return new GetLoadTypeList();
     }
 
     public function setClientAddress(ClientAddress $clientAddress): self
