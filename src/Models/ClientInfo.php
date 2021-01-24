@@ -20,6 +20,9 @@ class ClientInfo extends Model
         $this->ClientID = (int) Naqel::config('client_id');
         $this->Password = (string) Naqel::config('password');
         $this->Version = (string) Naqel::config('version');
+
+        $this->setClientAddress(Naqel::getClientAddress());
+        $this->setClientContact(Naqel::getClientContact());
     }
 
     public function getClientID(): int

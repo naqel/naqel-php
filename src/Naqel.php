@@ -4,10 +4,14 @@ namespace Naqel;
 
 use Naqel\Methods\CreateWaybill;
 use Naqel\Methods\GetWaybillSticker;
+use Naqel\Models\ClientAddress;
+use Naqel\Models\ClientContact;
 
 class Naqel
 {
     protected static array $config = [];
+    protected static ClientAddress $clientAddress;
+    protected static ClientContact $clientContact;
 
     public function __construct(array $config = [])
     {
@@ -32,5 +36,29 @@ class Naqel
     public function getWaybillSticker(): GetWaybillSticker
     {
         return new GetWaybillSticker();
+    }
+
+    public function setClientAddress(ClientAddress $clientAddress): self
+    {
+        self::$clientAddress = $clientAddress;
+
+        return $this;
+    }
+
+    public function setClientContact(ClientContact $clientContact): self
+    {
+        self::$clientContact = $clientContact;
+
+        return $this;
+    }
+
+    public static function getClientAddress(): ClientAddress
+    {
+        return self::$clientAddress;
+    }
+
+    public static function getClientContact(): ClientContact
+    {
+        return self::$clientContact;
     }
 }

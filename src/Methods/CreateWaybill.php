@@ -4,6 +4,7 @@ namespace Naqel\Methods;
 
 use Closure;
 use Naqel\Constants\StickerSize;
+use Naqel\Models\ClientInfo;
 use Naqel\Models\ManifestShipment;
 
 class CreateWaybill extends Method
@@ -24,6 +25,8 @@ class CreateWaybill extends Method
         } else {
             $this->manifestShipment = $value;
         }
+
+        $this->manifestShipment->setClientInfo(new ClientInfo());
 
         $this->params['_ManifestShipmentDetails'] = $this->manifestShipment;
 
