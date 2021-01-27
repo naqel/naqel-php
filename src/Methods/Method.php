@@ -37,14 +37,18 @@ class Method
         return $this->setResponse($response);
     }
 
-    public function getResponse($delay = 0): object
+    public function getResponse($delay = 0, $tries = 3): object
     {
         try {
             return $this->response;
         } catch (Error $e) {
+            if (0 === $tries) {
+                throw $e;
+            }
+
             sleep($delay);
 
-            return $this->send()->getResponse(3);
+            return $this->send()->getResponse(3, --$tries);
         }
     }
 
