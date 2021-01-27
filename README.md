@@ -78,27 +78,24 @@ $manifestShipment = (new \Naqel\Models\ManifestShipment())
 
 Create a New Waybill w/ Manifest:
 ```php
-$waybill = $naqel->createWaybill()->attachManifest($manifestShipment);
+$waybill = \Naqel\Waybill::create($manifestShipment);
+```
+
+Or you can get a waybill instance by its number
+```php
+$waybill = \Naqel\Waybill::create($waybill->number());
 ```
 
 Get the waybill number:
 ```php
-$waybillNumber = $waybill->getWaybillNumber();
+$waybillNumber = $waybill->number();
 ```
 
 Get the waybill sticker as a PDF content:
 ```php
-$sticker = $waybill->getWaybillSticker(
+$sticker = $waybill->printSticker(
     \Naqel\Constants\StickerSize::FourMFourInches
 );
-```
-
-Or you can get a sticker by a waybill number:
-```php
-$sticker = $naqel->getWaybillSticker()
-    ->setWaybillNo($waybill->getWaybillNumber())
-    ->setStickerSize(\Naqel\Constants\StickerSize::FourMFourInches)
-    ->getPDF();
 ```
 
 ## Versioning
