@@ -18,6 +18,6 @@ class IsWaybillExists extends Method
 
     public function isExists(): bool
     {
-        return $this->getResponse()->IsWaybillExistsResult;
+        return $this->IsWaybillExistsResult;
     }
 }

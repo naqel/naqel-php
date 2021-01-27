@@ -18,6 +18,6 @@ class IsWaybillDelivered extends Method
 
     public function isDelivered(): bool
     {
-        return $this->getResponse()->IsWaybillDeliveredResult;
+        return $this->IsWaybillDeliveredResult;
     }
 }
