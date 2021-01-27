@@ -3,18 +3,12 @@
 namespace Naqel\Methods;
 
 use Closure;
-use Naqel\Constants\StickerSize;
 use Naqel\Models\ClientInfo;
 use Naqel\Models\ManifestShipment;
 
 class CreateWaybill extends Method
 {
     protected ManifestShipment $manifestShipment;
-
-    public function getManifestShipment(): ManifestShipment
-    {
-        return $this->manifestShipment;
-    }
 
     public function attachManifest($value): self
     {
@@ -33,16 +27,8 @@ class CreateWaybill extends Method
         return $this;
     }
 
-    public function getWaybillNumber(): int
+    public function getWaybillNo(): int
     {
-        return $this->getResponse()->CreateWaybillResult->WaybillNo;
-    }
-
-    public function getWaybillSticker(string $stickerSize = StickerSize::A4): string
-    {
-        return (new GetWaybillSticker())
-            ->setWaybillNo($this->getWaybillNumber())
-            ->setStickerSize($stickerSize)
-            ->getPDF();
+        return (int) $this->CreateWaybillResult->WaybillNo;
     }
 }

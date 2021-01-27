@@ -2,9 +2,7 @@
 
 namespace Naqel;
 
-use Naqel\Methods\CreateWaybill;
 use Naqel\Methods\GetLoadTypeList;
-use Naqel\Methods\GetWaybillSticker;
 use Naqel\Models\ClientAddress;
 use Naqel\Models\ClientContact;
 
@@ -27,16 +25,6 @@ class Naqel
     public function setConfig(array $config = [])
     {
         self::$config = $config;
-    }
-
-    public function createWaybill(): CreateWaybill
-    {
-        return new CreateWaybill();
-    }
-
-    public function getWaybillSticker(): GetWaybillSticker
-    {
-        return new GetWaybillSticker();
     }
 
     public function getLoadTypeList(): GetLoadTypeList
