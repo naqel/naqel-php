@@ -17,6 +17,11 @@ class Method
         return (array) $this->getResponse();
     }
 
+    public function __get($name)
+    {
+        return $this->getResponse()->{$name};
+    }
+
     public function send(): self
     {
         $method = new ReflectionClass(static::class);
