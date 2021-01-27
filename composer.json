@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": ">=7.4",
-	  	"ext-soap": "*"
+	  	"ext-soap": "*",
+        "illuminate/collections": "^8.24"
 	},
     "require-dev": {
         "phpunit/phpunit": "^9.5",
