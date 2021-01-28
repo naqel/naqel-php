@@ -16,7 +16,7 @@ class ManifestShipment extends Model
     public float $CODCharge = 0.0;
 
     // Mandatory if `DeclareValue` > 0
-    public $CommercialInvoice;
+    public CommercialInvoice $_CommercialInvoice;
     public int $CurrenyID;
 
     // Optional Elements
@@ -49,9 +49,9 @@ class ManifestShipment extends Model
     /**
      * @return mixed
      */
-    public function getCommercialInvoice()
+    public function getCommercialInvoice(): CommercialInvoice
     {
-        return $this->CommercialInvoice;
+        return $this->_CommercialInvoice;
     }
 
     /**
@@ -179,9 +179,9 @@ class ManifestShipment extends Model
         return $this;
     }
 
-    public function setCommercialInvoice($value): self
+    public function setCommercialInvoice(CommercialInvoice $value): self
     {
-        $this->CommercialInvoice = $value;
+        $this->_CommercialInvoice = $value;
 
         return $this;
     }
