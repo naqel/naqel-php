@@ -29,6 +29,6 @@ class CreateWaybill extends Method
 
     public function getWaybillNo(): int
     {
-        return (int) $this->CreateWaybillResult->WaybillNo;
+        return $this->CreateWaybillResult->WaybillNo;
     }
 }
