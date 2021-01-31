@@ -9,7 +9,7 @@ class GetWaybillSticker extends Method
         return $this->params['WaybillNo'];
     }
 
-    public function setWaybillNo(int $waybillNo): GetWaybillSticker
+    public function setWaybillNo(int $waybillNo): self
     {
         $this->params['WaybillNo'] = $waybillNo;
 
@@ -21,7 +21,7 @@ class GetWaybillSticker extends Method
         return $this->params['StickerSize'];
     }
 
-    public function setStickerSize(string $stickerSize): GetWaybillSticker
+    public function setStickerSize(string $stickerSize): self
     {
         $this->params['StickerSize'] = $stickerSize;
 
