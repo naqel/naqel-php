@@ -30,6 +30,7 @@ class Method
 
         $this->params['clientInfo'] = new ClientInfo();
         $this->params['ClientInfo'] = new ClientInfo();
+        $this->params['_clientInfo'] = new ClientInfo();
         $this->params['_ClientInfo'] = new ClientInfo();
 
         $response = call_user_func([$request, $method->getShortName()], $this->params);
