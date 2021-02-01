@@ -2,6 +2,8 @@
 
 namespace Naqel;
 
+use DateTime;
+use Illuminate\Support\Collection;
 use Naqel\Constants\StickerSize;
 use Naqel\Methods\CreateWaybill;
 use Naqel\Methods\GetWaybillNoByRefNo;
@@ -9,6 +11,7 @@ use Naqel\Methods\GetWaybillSticker;
 use Naqel\Methods\IsWaybillDelivered;
 use Naqel\Methods\IsWaybillExists;
 use Naqel\Methods\MultiWayBillTracking;
+use Naqel\Methods\TraceByMultiWaybillNo;
 use Naqel\Methods\TraceByWaybillNo;
 use Naqel\Models\ManifestShipment;
 
@@ -40,6 +43,42 @@ class Waybill
         }
 
         return new self($value);
+    }
+
+    public static function traceWaybill($waybills, $getOnlyLastTrace = false): array
+    {
+        $createWaybill = new TraceByMultiWaybillNo();
+
+        $solo = ! is_array($waybills);
+
+        if ($solo) {
+            $waybills = [$waybills];
+        }
+
+        $createWaybill->setWaybillNo(...$waybills);
+
+        $results = Collection::wrap($createWaybill->TraceByMultiWaybillNoResult->Tracking);
+
+        $results = $results->map(function (object $result) {
+            $result = (array) $result;
+            $result['Date'] = new DateTime($result['Date']);
+
+            return $result;
+        })->sortBy('Date')->groupBy('WaybillNo');
+
+        if ($solo) {
+            $results = $results->first();
+
+            if ($getOnlyLastTrace) {
+                return $results->last();
+            }
+        }
+
+        if ($getOnlyLastTrace) {
+            $results = $results->map(fn (Collection $x) => $x->last());
+        }
+
+        return $results->toArray();
     }
 
     public static function byRefNo($refNo): self
