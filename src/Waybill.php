@@ -68,7 +68,7 @@ class Waybill
         return $this;
     }
 
-    public function getBookingRefNo(): int
+    public function getBookingRefNo(): string
     {
         return $this->bookingRefNo;
     }
