@@ -15,7 +15,7 @@ use Naqel\Models\ManifestShipment;
 class Waybill
 {
     protected int $waybillNo;
-    protected int $bookingRefNo;
+    protected string $bookingRefNo;
 
     public function __construct($waybill = null)
     {
@@ -23,7 +23,10 @@ class Waybill
             $this->setWaybillNo($waybill);
         } elseif (is_object($waybill)) {
             $this->setWaybillNo($waybill->WaybillNo);
-            $this->setBookingRefNo($waybill->BookingRefNo);
+
+            if (isset($waybill->BookingRefNo)) {
+                $this->setBookingRefNo($waybill->BookingRefNo);
+            }
         }
     }
 
@@ -70,7 +73,7 @@ class Waybill
         return $this->bookingRefNo;
     }
 
-    public function setBookingRefNo(int $bookingRefNo): self
+    public function setBookingRefNo(string $bookingRefNo): self
     {
         $this->bookingRefNo = $bookingRefNo;
 
