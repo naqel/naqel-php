@@ -5,6 +5,7 @@ namespace Naqel;
 use DateTime;
 use Illuminate\Support\Collection;
 use Naqel\Constants\StickerSize;
+use Naqel\Methods\CreateBooking;
 use Naqel\Methods\CreateWaybill;
 use Naqel\Methods\GetWaybillNoByRefNo;
 use Naqel\Methods\GetWaybillSticker;
@@ -13,6 +14,7 @@ use Naqel\Methods\IsWaybillExists;
 use Naqel\Methods\MultiWayBillTracking;
 use Naqel\Methods\TraceByMultiWaybillNo;
 use Naqel\Methods\TraceByWaybillNo;
+use Naqel\Models\BookingShipmentDetail;
 use Naqel\Models\ManifestShipment;
 
 class Waybill
@@ -43,6 +45,15 @@ class Waybill
         }
 
         return new self($value);
+    }
+
+    public function createBooking(BookingShipmentDetail $value): Waybill
+    {
+        $createBooking = new CreateBooking();
+
+        $createBooking->attach($value);
+
+        return new self($createBooking->CreateBookingResult);
     }
 
     public static function traceWaybill($waybills, $getOnlyLastTrace = false): array
