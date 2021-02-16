@@ -138,7 +138,6 @@ class BookingShipmentDetail extends Model
 
     public function setOfficeUpTo(DateTime $officeUpTo): self
     {
-        var_dump($officeUpTo->format(DateTime::ATOM));
         $this->OfficeUpTo = $officeUpTo->format(DateTime::ATOM);
 
         return $this;
